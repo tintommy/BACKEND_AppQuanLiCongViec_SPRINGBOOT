@@ -1,6 +1,7 @@
 package org.example.quanlycongviec.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +20,7 @@ public class CongViecNgay {
     private int maCvNgay;
 
     @Column(name = "ngay_lam")
-    private Date ngayLam;
+    private String ngayLam;
 
     @Column(name = "trang_thai")
     private boolean trangThai;

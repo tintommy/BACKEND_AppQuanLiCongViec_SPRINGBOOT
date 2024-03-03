@@ -1,6 +1,7 @@
 package org.example.quanlycongviec.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,6 +46,7 @@ public class CongViec {
     @JoinColumn(name = "ma_nd")
     private NguoiDung nguoiDung;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "congViec",
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})

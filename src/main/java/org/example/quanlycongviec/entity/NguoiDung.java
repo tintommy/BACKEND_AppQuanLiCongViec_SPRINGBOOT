@@ -37,17 +37,19 @@ public class NguoiDung {
     @Column(name = "ma_pin")
     private String maPin;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "nguoiDung",
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<GhiChuMatKhau> ghiChuMatKhauList;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "nguoiDung",
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<CongViec> congViecList;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "nguoiDung",
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
