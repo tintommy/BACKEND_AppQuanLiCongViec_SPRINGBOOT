@@ -15,7 +15,7 @@ public class GhiChuMatKhau {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ma_gcmk")
-    private Integer maGhiChuMK;
+    private int maGhiChuMK;
 
     @Column(name = "tieu_de")
     private String tieuDe;

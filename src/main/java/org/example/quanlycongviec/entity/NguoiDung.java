@@ -18,7 +18,7 @@ public class NguoiDung {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ma_nd")
-    private Integer maNguoiDung;
+    private int maNguoiDung;
 
     private String ho;
     private String ten;
@@ -27,7 +27,7 @@ public class NguoiDung {
     private Date ngaySinh;
 
     @Column(name = "gioi_tinh")
-    private Boolean gioiTinh;
+    private boolean gioiTinh;
 
     private String email;
 

@@ -4,7 +4,6 @@ import org.example.quanlycongviec.entity.CongViecNgay;
 
 import java.util.List;
 
-public interface CongViecService {
+public interface CongViecNgayService {
     List<CongViecNgay> layTatCaCongViecNgayCuaNguoiDung(int maNguoiDung);
-
 }

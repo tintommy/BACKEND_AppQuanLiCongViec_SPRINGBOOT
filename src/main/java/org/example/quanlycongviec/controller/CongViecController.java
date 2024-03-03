@@ -14,10 +14,14 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/api/CongViec")
 public class CongViecController {
+
+    private CongViecService congViecService;
     @Autowired
-    CongViecService congViecService;
+    public void setCongViecService(CongViecService congViecService) {
+        this.congViecService = congViecService;
+    }
+
     @GetMapping("")
-        //http://localhost:8080/api/CongViec
     ResponseEntity<List<CongViecNgay>> layTatCaCongViecNgayCuaNguoiDung() {
         return ResponseEntity.ok(congViecService.layTatCaCongViecNgayCuaNguoiDung(2));
     }

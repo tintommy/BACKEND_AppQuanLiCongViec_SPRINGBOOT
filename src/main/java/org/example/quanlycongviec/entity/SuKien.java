@@ -16,7 +16,7 @@ public class SuKien {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ma_sk")
-    private Integer maSK;
+    private int maSK;
 
     @Column(name = "ten_su_kien")
     private String tenSuKien;
@@ -24,7 +24,7 @@ public class SuKien {
     private String gio;
 
     @Column(name = "nhac_truoc")
-    private Integer nhacTruoc;
+    private int nhacTruoc;
 
     @Column(name = "mo_ta")
     private String moTa;
