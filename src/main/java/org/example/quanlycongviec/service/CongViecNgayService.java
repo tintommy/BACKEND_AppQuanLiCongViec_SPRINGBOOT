@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface CongViecNgayService {
     List<CongViecNgay> layTatCaCongViecNgayCuaNguoiDung(int maNguoiDung);
+    CongViecNgay save(CongViecNgay congViecNgay);
+
 }

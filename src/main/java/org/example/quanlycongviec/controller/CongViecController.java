@@ -21,8 +21,5 @@ public class CongViecController {
         this.congViecService = congViecService;
     }
 
-    @GetMapping("")
-    ResponseEntity<List<CongViecNgay>> layTatCaCongViecNgayCuaNguoiDung() {
-        return ResponseEntity.ok(congViecService.layTatCaCongViecNgayCuaNguoiDung(2));
-    }
+
 }
