@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -23,10 +24,10 @@ public class NguoiDung {
     private String ten;
 
     @Column(name = "ngay_sinh")
-    private String ngaySinh;
+    private Date ngaySinh;
 
     @Column(name = "gioi_tinh")
-    private String gioiTinh;
+    private Boolean gioiTinh;
 
     private String email;
 
@@ -36,18 +37,18 @@ public class NguoiDung {
     @Column(name = "ma_pin")
     private String maPin;
 
-    @OneToMany(mappedBy = "nguoidung",
+    @OneToMany(mappedBy = "nguoiDung",
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<GhiChuMatKhau> ghiChuMatKhauList;
 
 
-    @OneToMany(mappedBy = "nguoidung",
+    @OneToMany(mappedBy = "nguoiDung",
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<CongViec> congViecList;
 
-    @OneToMany(mappedBy = "nguoidung",
+    @OneToMany(mappedBy = "nguoiDung",
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<SuKien> suKienList;

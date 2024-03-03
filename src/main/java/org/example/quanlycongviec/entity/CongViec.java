@@ -45,7 +45,7 @@ public class CongViec {
     @JoinColumn(name = "ma_nd")
     private NguoiDung nguoiDung;
 
-    @OneToMany(mappedBy = "congviec",
+    @OneToMany(mappedBy = "congViec",
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<CongViecNgay> congViecNgayList;
