@@ -1,6 +1,7 @@
 package org.example.quanlycongviec.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class CongViec {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ma_cv")
-    private Integer maCV;
+    private int maCV;
 
     @Column(name = "tieu_de")
     private String tieuDe;
@@ -30,7 +31,7 @@ public class CongViec {
     private Date ngayBatDau;
 
     @Column(name = "tinh_chat")
-    private Integer tinhChat;
+    private int tinhChat;
 
     @Column(name = "chu_ki")
     private String chuKi;
@@ -39,12 +40,13 @@ public class CongViec {
     private Date dungSauNgay ;
 
     @Column(name = "so_lan")
-    private Integer soLan;
+    private int soLan;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "ma_nd")
     private NguoiDung nguoiDung;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "congViec",
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})

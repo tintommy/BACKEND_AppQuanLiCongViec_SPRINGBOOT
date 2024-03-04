@@ -10,9 +10,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface CongViecRepository extends JpaRepository<CongViec, Integer> {
-    @Query("Select * from CongViecNgay cvn where cvn.congViec.nguoiDung.maND= :maNguoiDung")
-    List<CongViecNgay> layTatCaCongViecNgayCuaNguoiDung(@Param("maNguoiDung") int maNguoiDung);
-    List<CongViecNgay> findAllCongViecNgayByNguoiDung( NguoiDung nguoiDung);
+    List<CongViec> findByNguoiDung_MaNguoiDung(int maND);
 
 
 }

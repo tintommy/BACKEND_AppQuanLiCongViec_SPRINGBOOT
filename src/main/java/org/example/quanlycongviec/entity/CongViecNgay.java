@@ -1,6 +1,7 @@
 package org.example.quanlycongviec.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,13 +17,13 @@ public class CongViecNgay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ma_cv_ngay")
-    private Integer maCvNgay;
+    private int maCvNgay;
 
     @Column(name = "ngay_lam")
-    private Date ngayLam;
+    private String ngayLam;
 
     @Column(name = "trang_thai")
-    private Boolean trangThai;
+    private boolean trangThai;
 
     @Column(name = "hinh_anh")
     private String hinhAnh;
@@ -30,6 +31,7 @@ public class CongViecNgay {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "ma_cv")
     private CongViec congViec;
+
 
 
 
