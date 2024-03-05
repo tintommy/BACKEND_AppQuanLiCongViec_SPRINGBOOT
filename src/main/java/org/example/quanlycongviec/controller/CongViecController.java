@@ -1,5 +1,6 @@
 package org.example.quanlycongviec.controller;
 
+import lombok.AllArgsConstructor;
 import org.example.quanlycongviec.entity.CongViecNgay;
 import org.example.quanlycongviec.service.CongViecService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +14,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/CongViec")
+@AllArgsConstructor
 public class CongViecController {
 
     private CongViecService congViecService;
-    @Autowired
-    public void setCongViecService(CongViecService congViecService) {
-        this.congViecService = congViecService;
-    }
-
 
 }
