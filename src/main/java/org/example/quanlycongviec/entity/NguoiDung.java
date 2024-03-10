@@ -24,7 +24,7 @@ public class NguoiDung {
     private String ten;
 
     @Column(name = "ngay_sinh")
-    private Date ngaySinh;
+    private String ngaySinh;
 
     @Column(name = "gioi_tinh")
     private boolean gioiTinh;

@@ -9,21 +9,55 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/CongViecNgay")
+@RequestMapping(path = "/CongViecNgay")
+//http://localhost:8080/api/CongViecNgay
 public class CongViecNgayController {
     private CongViecNgayService congViecNgayService;
 
-    @GetMapping("/{maNd}")
-    public ResponseEntity<List<CongViecNgay>> congViecNgayTheoMaNd(@PathVariable int maNd ) {
-        List<CongViecNgay> listCongViecNgay = congViecNgayService.layTatCaCongViecNgayCuaNguoiDung(maNd);
+    @Autowired
+    public void setCongViecNgayService(CongViecNgayService congViecNgayService) {
+        this.congViecNgayService = congViecNgayService;
+    }
+
+    @GetMapping("/NguoiDung/{maNd}/{ngay}")
+    public ResponseEntity<List<CongViecNgay>> congViecNgayTheoMaNd(@PathVariable int maNd, @PathVariable String ngay) {
+        List<CongViecNgay> listCongViecNgay = congViecNgayService.layTatCaCongViecNgayCuaNguoiDung(maNd, ngay);
         if (!listCongViecNgay.isEmpty()) {
             return ResponseEntity.ok(listCongViecNgay);
         }
         return ResponseEntity.notFound().build();
     }
 
-    @Autowired
-    public void setCongViecNgayService(CongViecNgayService congViecNgayService) {
-        this.congViecNgayService = congViecNgayService;
+    @GetMapping("/{maCvNgay}")
+    public ResponseEntity<CongViecNgay> congViecNgayTheoMaCvNgay(@PathVariable int maCvNgay) {
+        CongViecNgay congViecNgay = congViecNgayService.layCongViecNgayTheoMaCvNgay(maCvNgay);
+        if (congViecNgay != null)
+            return ResponseEntity.ok(congViecNgay);
+        else
+            return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/CapNhatTrangThai/{maCvNgay}/{maNd}/{ngay}")
+    public ResponseEntity<List<CongViecNgay>> capNhatTrangThaiCongViecNgay(@PathVariable int maCvNgay,@PathVariable int maNd, @PathVariable String ngay) {
+        CongViecNgay congViecNgay = congViecNgayService.layCongViecNgayTheoMaCvNgay(maCvNgay);
+        congViecNgay.setTrangThai(!congViecNgay.isTrangThai());
+        congViecNgayService.save(congViecNgay);
+        List<CongViecNgay> listCongViecNgay = congViecNgayService.layTatCaCongViecNgayCuaNguoiDung(maNd, ngay);
+        return ResponseEntity.ok(listCongViecNgay);
+    }
+
+    @GetMapping("/XoaCongViecNgay/{maCvNgay}/{maNd}/{ngay}")
+    public ResponseEntity<List<CongViecNgay>> xoaCongViecNgay(@PathVariable int maCvNgay,@PathVariable int maNd, @PathVariable String ngay){
+        congViecNgayService.deleteById(maCvNgay);
+        List<CongViecNgay> listCongViecNgay = congViecNgayService.layTatCaCongViecNgayCuaNguoiDung(maNd, ngay);
+        if (!listCongViecNgay.isEmpty()) {
+            return ResponseEntity.ok(listCongViecNgay);
+        }
+        return ResponseEntity.notFound().build();
+    }
+    @PostMapping("/LuuCongViecNgay")
+    public void luuCongViecNgay(@RequestBody CongViecNgay cvn )
+    {
+        congViecNgayService.save(cvn);
     }
 }

@@ -20,7 +20,7 @@ public class SuKien {
 
     @Column(name = "ten_su_kien")
     private String tenSuKien;
-    private Date ngay;
+    private String ngay;
     private String gio;
 
     @Column(name = "nhac_truoc")
@@ -29,6 +29,8 @@ public class SuKien {
     @Column(name = "mo_ta")
     private String moTa;
 
+    @Column(name="ngay_nhac")
+    private String ngayNhac;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "ma_nd")

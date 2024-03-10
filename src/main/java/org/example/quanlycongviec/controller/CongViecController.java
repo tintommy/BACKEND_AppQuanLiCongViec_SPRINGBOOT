@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/CongViec")
+@RequestMapping(path = "/CongViec")
 public class CongViecController {
 
     private CongViecService congViecService;

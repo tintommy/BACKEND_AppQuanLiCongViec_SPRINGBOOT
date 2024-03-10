@@ -18,13 +18,23 @@ public class CongViecNgayServiceImpl implements CongViecNgayService {
     }
 
     @Override
-    public List<CongViecNgay> layTatCaCongViecNgayCuaNguoiDung(int maNguoiDung) {
-        return congViecNgayRepository.findByCongViec_NguoiDung_MaNguoiDung(maNguoiDung);
+    public List<CongViecNgay> layTatCaCongViecNgayCuaNguoiDung(int maNguoiDung,String ngayLam) {
+        return congViecNgayRepository.findByCongViec_NguoiDung_MaNguoiDungAndNgayLam(maNguoiDung,ngayLam);
     }
 
     @Override
     public CongViecNgay save(CongViecNgay congViecNgay) {
         return congViecNgayRepository.save(congViecNgay);
+    }
+
+    @Override
+    public void deleteById(int maCvNgay) {
+        congViecNgayRepository.deleteById(maCvNgay);
+    }
+
+    @Override
+    public CongViecNgay layCongViecNgayTheoMaCvNgay(int maCvNgay) {
+        return congViecNgayRepository.findByMaCvNgay(maCvNgay);
     }
 
 
