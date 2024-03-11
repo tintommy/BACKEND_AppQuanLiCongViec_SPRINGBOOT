@@ -3,6 +3,7 @@ package org.example.quanlycongviec.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.quanlycongviec.entity.CongViecNgay;
 import org.example.quanlycongviec.entity.HinhAnh;
+import org.example.quanlycongviec.service.CongViecNgayService;
 import org.example.quanlycongviec.service.HinhAnhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +20,8 @@ import java.util.Map;
 public class HinhAnhController {
     @Autowired
     private HinhAnhService hinhAnhService;
+    @Autowired
+    private CongViecNgayService congViecNgayService;
 
 
     @GetMapping("/LayHinhAnh/{maCvNgay}")
@@ -29,21 +33,14 @@ public class HinhAnhController {
             return ResponseEntity.notFound().build();
     }
 
-    @RequestMapping(value = "/LuuHinhAnh", method = RequestMethod.POST)
-    private ResponseEntity luuDanhSachAnh(@Validated @RequestBody List<Object> hinhAnhList) {
+    @RequestMapping(value = "/LuuHinhAnh/{maCvNgay}", method = RequestMethod.POST)
+    private ResponseEntity<Void> luuDanhSachAnh(@PathVariable int maCvNgay, @Validated @RequestBody List<String > anhUrlList) {
 
+        CongViecNgay congViecNgay = congViecNgayService.layCongViecNgayTheoMaCvNgay(maCvNgay);
 
-
-        for (int i = 0; i < hinhAnhList.size(); i++) {
-
+        for (int i = 0; i < anhUrlList.size(); i++) {
             try {
-                System.out.println(hinhAnhList.get(i).toString());
-//                // Khởi tạo ObjectMapper để chuyển đổi JSON thành đối tượng Java
-//                ObjectMapper objectMapper = new ObjectMapper();
-//
-//                // Chuyển đổi JSON thành đối tượng HinhAnh
-//                HinhAnh hinhAnh = objectMapper.readValue(hinhAnhList.get(i).toString(), HinhAnh.class);
-//                hinhAnhService.save(hinhAnh);
+                hinhAnhService.save(new HinhAnh(anhUrlList.get(i),congViecNgay));
 
             } catch (Exception e) {
                 e.printStackTrace();

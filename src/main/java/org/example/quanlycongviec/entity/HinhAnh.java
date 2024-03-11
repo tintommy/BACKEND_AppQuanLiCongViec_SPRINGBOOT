@@ -24,7 +24,7 @@ public class HinhAnh {
     @JoinColumn(name = "ma_cv_ngay")
     private CongViecNgay cvNgay;
 
-    public HinhAnh( CongViecNgay cvNgay,String link) {
+    public HinhAnh( String link,CongViecNgay cvNgay) {
         this.link = link;
         this.cvNgay = cvNgay;
     }
