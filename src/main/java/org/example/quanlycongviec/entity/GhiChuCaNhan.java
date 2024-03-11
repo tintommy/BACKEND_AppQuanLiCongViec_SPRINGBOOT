@@ -25,7 +25,7 @@ public class GhiChuCaNhan {
     private String noiDung;
 
     @Column(name = "ngay_chinh_sua")
-    private Date ngayChinhSua;
+    private String ngayChinhSua;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "ma_nd")

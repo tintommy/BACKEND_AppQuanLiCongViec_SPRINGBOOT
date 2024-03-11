@@ -28,7 +28,7 @@ public class CongViec {
     private String noiDung;
 
     @Column(name = "ngay_bat_dau")
-    private Date ngayBatDau;
+    private String ngayBatDau;
 
     @Column(name = "tinh_chat")
     private int tinhChat;
@@ -37,10 +37,11 @@ public class CongViec {
     private String chuKi;
 
     @Column(name = "dung_sau_ngay")
-    private Date dungSauNgay ;
+    private String dungSauNgay ;
 
     @Column(name = "so_lan")
     private int soLan;
+
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "ma_nd")

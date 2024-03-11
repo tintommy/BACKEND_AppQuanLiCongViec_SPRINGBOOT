@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,8 +26,11 @@ public class CongViecNgay {
     @Column(name = "trang_thai")
     private boolean trangThai;
 
-    @Column(name = "hinh_anh")
-    private String hinhAnh;
+    @JsonIgnore
+    @OneToMany(mappedBy = "cvNgay",
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    private List<HinhAnh> hinhAnhList;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "ma_cv")

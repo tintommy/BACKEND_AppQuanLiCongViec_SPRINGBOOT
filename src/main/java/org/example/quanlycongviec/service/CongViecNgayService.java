@@ -5,7 +5,8 @@ import org.example.quanlycongviec.entity.CongViecNgay;
 import java.util.List;
 
 public interface CongViecNgayService {
-    List<CongViecNgay> layTatCaCongViecNgayCuaNguoiDung(int maNguoiDung);
+    List<CongViecNgay> layTatCaCongViecNgayCuaNguoiDung(int maNguoiDung,String ngay);
     CongViecNgay save(CongViecNgay congViecNgay);
-
+    void  deleteById(int maCvNgay);
+    CongViecNgay layCongViecNgayTheoMaCvNgay(int maCvNgay);
 }
