@@ -2,14 +2,14 @@ package org.example.quanlycongviec.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "Hinh_Anh")
+@Getter
+@Setter
 public class HinhAnh {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

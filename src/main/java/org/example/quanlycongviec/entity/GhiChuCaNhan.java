@@ -2,9 +2,7 @@ package org.example.quanlycongviec.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
@@ -12,6 +10,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "ghi_chu_ca_nhan")
+@Getter
+@Setter
 public class GhiChuCaNhan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

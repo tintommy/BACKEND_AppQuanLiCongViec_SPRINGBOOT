@@ -2,10 +2,7 @@ package org.example.quanlycongviec.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -14,6 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "nguoi_dung")
+@Getter
+@Setter
 public class NguoiDung {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
