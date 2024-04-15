@@ -15,6 +15,11 @@ public class NguoiDungServiceImpl implements NguoiDungService {
         return nguoiDungRepository.save(nguoiDung);
     }
 
+    @Override
+    public NguoiDung findUserByEmail(String email) {
+        return nguoiDungRepository.findByEmail(email);
+    }
+
     @Autowired
     public void setNguoiDungRepository(NguoiDungRepository nguoiDungRepository) {
         this.nguoiDungRepository = nguoiDungRepository;
