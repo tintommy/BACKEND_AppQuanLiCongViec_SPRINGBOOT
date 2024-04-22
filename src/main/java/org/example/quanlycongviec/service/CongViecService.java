@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface CongViecService {
     CongViec save(CongViec congViec);
+    List<String> danhSachNgay(int maNd);
 
 }

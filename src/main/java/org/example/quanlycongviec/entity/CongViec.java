@@ -43,7 +43,7 @@ public class CongViec {
     private int soLan;
 
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne()
     @JoinColumn(name = "ma_nd")
     private NguoiDung nguoiDung;
 

@@ -36,8 +36,4 @@ public class CongViecNgay {
     @JoinColumn(name = "ma_cv")
     private CongViec congViec;
 
-
-
-
-
 }
