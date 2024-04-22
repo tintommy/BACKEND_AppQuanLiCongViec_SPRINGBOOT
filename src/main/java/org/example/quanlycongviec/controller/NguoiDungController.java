@@ -21,6 +21,7 @@ public class NguoiDungController {
     @GetMapping("/{email}")
     public ResponseEntity<NguoiDung> getNguoiDung(@PathVariable String email){
         NguoiDung nguoiDung = nguoiDungService.findUserByEmail(email);
+        System.out.println(email);
         if(nguoiDung!=null)
             return ResponseEntity.ok(nguoiDung);
         else

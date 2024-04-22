@@ -1,6 +1,7 @@
 package org.example.quanlycongviec.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,6 +35,7 @@ public class SuKien {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "ma_nd")
+    @JsonIgnore
     private NguoiDung nguoiDung;
 
 }
