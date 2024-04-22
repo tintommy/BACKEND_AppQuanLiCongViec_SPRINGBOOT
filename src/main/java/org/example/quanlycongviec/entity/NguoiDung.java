@@ -27,7 +27,7 @@ public class NguoiDung {
 
     @Column(name = "gioi_tinh")
     private boolean gioiTinh;
-
+    @Column(name = "email")
     private String email;
 
     @Column(name = "mat_khau")

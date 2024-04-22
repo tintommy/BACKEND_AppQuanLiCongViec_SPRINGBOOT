@@ -3,6 +3,7 @@ package org.example.quanlycongviec.controller;
 
 import org.example.quanlycongviec.Request.SignInRequest;
 import org.example.quanlycongviec.Request.SignUpRequest;
+import org.example.quanlycongviec.service.EmailService;
 import org.example.quanlycongviec.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,13 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private EmailService emailService;
 
-
+    @PostMapping("/sendMail")
+    public ResponseEntity<?> sendMail(@RequestParam String email ) {
+       return ResponseEntity.ok(Collections.singletonMap("otp",emailService.sendMail(email)));
+    }
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody SignUpRequest signUpRequest) {
