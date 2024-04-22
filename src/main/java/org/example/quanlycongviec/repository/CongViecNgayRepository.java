@@ -11,5 +11,6 @@ public interface CongViecNgayRepository extends JpaRepository<CongViecNgay, Inte
     CongViecNgay findByMaCvNgay(int maCvNgay);
 
     List<CongViecNgay> findCongViecNgayByCongViec_NguoiDung_MaNguoiDung(int maNd);
+    int countByNgayLamAndTrangThaiAndCongViec_NguoiDung_MaNguoiDung(String ngaylam,boolean trangThai, int maNd);
 
 }

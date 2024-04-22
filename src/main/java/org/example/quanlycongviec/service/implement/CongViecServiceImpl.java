@@ -6,13 +6,17 @@ import org.example.quanlycongviec.entity.CongViec;
 import org.example.quanlycongviec.entity.CongViecNgay;
 import org.example.quanlycongviec.repository.CongViecNgayRepository;
 import org.example.quanlycongviec.repository.CongViecRepository;
+import org.example.quanlycongviec.response.NgayDaTaoResponse;
 import org.example.quanlycongviec.service.CongViecNgayService;
 import org.example.quanlycongviec.service.CongViecService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -28,20 +32,27 @@ public class CongViecServiceImpl implements CongViecService {
     public CongViec save(CongViec congViec) {
         CongViec newCongViec =congViecRepository.save(congViec);
 
+        if(congViec.getMaCV() == 0) {
+            return newCongViec;
+        }
+
         // mot lan
         if (congViec.getChuKi().equals("0")) {
             CongViecNgay congViecNgay = new CongViecNgay();
             congViecNgay.setTrangThai(false);
             congViecNgay.setNgayLam(congViec.getNgayBatDau());
+            congViecNgay.setCongViec(newCongViec);
             congViecNgayRepository.save(congViecNgay);
         }
         // hang ngay
         else if (congViec.getChuKi().equals("1")) {
             List<String> ngayLam = listDailyDates(congViec.getNgayBatDau(), congViec.getDungSauNgay());
+            System.out.println(ngayLam);
             for(String item:ngayLam ){
                 CongViecNgay congViecNgay = new CongViecNgay();
                 congViecNgay.setTrangThai(false);
                 congViecNgay.setNgayLam(item);
+                congViecNgay.setCongViec(newCongViec);
                 congViecNgayRepository.save(congViecNgay);
             }
         }
@@ -52,6 +63,7 @@ public class CongViecServiceImpl implements CongViecService {
                 CongViecNgay congViecNgay = new CongViecNgay();
                 congViecNgay.setTrangThai(false);
                 congViecNgay.setNgayLam(item);
+                congViecNgay.setCongViec(newCongViec);
                 congViecNgayRepository.save(congViecNgay);
             }
         }
@@ -62,6 +74,7 @@ public class CongViecServiceImpl implements CongViecService {
                 CongViecNgay congViecNgay = new CongViecNgay();
                 congViecNgay.setTrangThai(false);
                 congViecNgay.setNgayLam(item);
+                congViecNgay.setCongViec(newCongViec);
                 congViecNgayRepository.save(congViecNgay);
             }
         }
@@ -72,6 +85,7 @@ public class CongViecServiceImpl implements CongViecService {
                 CongViecNgay congViecNgay = new CongViecNgay();
                 congViecNgay.setTrangThai(false);
                 congViecNgay.setNgayLam(item);
+                congViecNgay.setCongViec(newCongViec);
                 congViecNgayRepository.save(congViecNgay);
             }
         }
@@ -82,26 +96,48 @@ public class CongViecServiceImpl implements CongViecService {
                 CongViecNgay congViecNgay = new CongViecNgay();
                 congViecNgay.setTrangThai(false);
                 congViecNgay.setNgayLam(item);
+                congViecNgay.setCongViec(newCongViec);
                 congViecNgayRepository.save(congViecNgay);
             }
         }
         return newCongViec;
     }
 
-    public List<String> danhSachNgay(int maNd) {
+    public List<NgayDaTaoResponse> danhSachNgay(int maNd) {
         List<CongViecNgay> items = congViecNgayRepository.findCongViecNgayByCongViec_NguoiDung_MaNguoiDung(maNd);
-        Set<String> danhSachNgay = new HashSet<>();
+        Set<String> danhSachNgay = new LinkedHashSet<>();
         for (CongViecNgay item: items) {
             danhSachNgay.add(item.getNgayLam());
         }
-        return List.copyOf(danhSachNgay);
+        List<String> tempDanhSachNgay = new ArrayList<>(danhSachNgay);
+        tempDanhSachNgay.sort(new Comparator<String>() {
+            public int compare(String o1, String o2) {
+                return o2.compareTo(o1);
+            }
+        });
+
+        List<NgayDaTaoResponse> ngayDaTaoResponses = new ArrayList<>();
+        for (String ngay:tempDanhSachNgay ) {
+            int daLam = congViecNgayRepository.countByNgayLamAndTrangThaiAndCongViec_NguoiDung_MaNguoiDung(ngay,true,maNd);
+            int chuaLam = congViecNgayRepository.countByNgayLamAndTrangThaiAndCongViec_NguoiDung_MaNguoiDung(ngay,false,maNd);
+            double phanTram = (double) daLam /((double)chuaLam + (double)daLam);
+            BigDecimal bd = new BigDecimal(phanTram).setScale(2, RoundingMode.HALF_UP);
+            phanTram = bd.doubleValue() * 100;
+
+            NgayDaTaoResponse response = new NgayDaTaoResponse();
+            response.setNgay(ngay);
+            response.setPhanTram(phanTram);
+            response.setMaNd(maNd);
+            ngayDaTaoResponses.add(response);
+        }
+        return ngayDaTaoResponses;
     }
 
 
     //Hang ngay
     private static List<String> listDailyDates(String startDateStr, String endDateStr) {
         List<String> dates = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date startDate = sdf.parse(startDateStr);
             Date endDate = sdf.parse(endDateStr);
@@ -147,7 +183,7 @@ public class CongViecServiceImpl implements CongViecService {
     //hang tuan
     private static List<String> listWeeklyDates(String startDateStr, String endDateStr) {
         List<String> dates = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date startDate = sdf.parse(startDateStr);
             Date endDate = sdf.parse(endDateStr);
@@ -170,7 +206,7 @@ public class CongViecServiceImpl implements CongViecService {
     // hang thang
     private static List<String> listMonthlyDates(String startDateStr, String endDateStr) {
         List<String> dates = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date startDate = sdf.parse(startDateStr);
             Date endDate = sdf.parse(endDateStr);
@@ -192,7 +228,7 @@ public class CongViecServiceImpl implements CongViecService {
     //hang nam
     private static List<String> listAnnualDates(String startDateStr, String endDateStr) {
         List<String> dates = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date startDate = sdf.parse(startDateStr);
             Date endDate = sdf.parse(endDateStr);
