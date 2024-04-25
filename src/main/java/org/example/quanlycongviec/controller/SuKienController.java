@@ -6,11 +6,9 @@ import org.example.quanlycongviec.service.CongViecNgayService;
 import org.example.quanlycongviec.service.SuKienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +21,16 @@ public class SuKienController {
     public void setSuKienService(SuKienService suKienService) {
         this.suKienService = suKienService;
     }
+
+    @GetMapping("/TatCaSuKien/{maNd}")
+    public ResponseEntity<List<SuKien>> tatCaSuKien( @PathVariable int maNd) {
+        List<SuKien> listSuKien = suKienService.layTatCaSuKienCuaNguoiDung( maNd);
+
+        if (!listSuKien.isEmpty()) {
+            return ResponseEntity.ok(listSuKien);
+        }
+        return ResponseEntity.notFound().build();
+    }
     @GetMapping("/SuKienHomNay/{ngay}/{maNd}")
     public ResponseEntity<List<SuKien>> suKienHomNay(@PathVariable String ngay, @PathVariable int maNd) {
         List<SuKien> listSuKien = suKienService.timSuKienTheoNgayCuaNguoiDung(ngay, maNd);
@@ -31,6 +39,7 @@ public class SuKienController {
         }
         return ResponseEntity.notFound().build();
     }
+
     @GetMapping("/SuKienSapToi/{ngay}/{maNd}")
     public ResponseEntity<List<SuKien>> suKienSapToi(@PathVariable String ngay, @PathVariable int maNd) {
         List<SuKien> listSuKien = suKienService.timSuKienSapToiCuaNguoiDung(ngay, maNd);
@@ -39,5 +48,31 @@ public class SuKienController {
             return ResponseEntity.ok(listSuKien);
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/ThemSuKien")
+    private ResponseEntity<?> themSuKien(@RequestBody SuKien suKien, @RequestParam Integer maNd) {
+        SuKien sk = suKienService.add(suKien, maNd);
+        if (sk != null)
+            return ResponseEntity.ok(Collections.singletonMap("status", true));
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/SuaSuKien")
+    private ResponseEntity<?> suaSuKien(@RequestBody SuKien suKien, @RequestParam Integer maNd) {
+        SuKien sk = suKienService.update(suKien, maNd);
+        if (sk != null)
+            return ResponseEntity.ok(Collections.singletonMap("status", true));
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/XoaSuKien")
+    private ResponseEntity<?> xoaSuKien(@RequestParam Integer maSuKien) {
+        suKienService.delete(maSuKien);
+        return ResponseEntity.ok(Collections.singletonMap("status", true));
+
+
     }
 }

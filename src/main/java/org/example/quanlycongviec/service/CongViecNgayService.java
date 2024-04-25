@@ -9,4 +9,6 @@ public interface CongViecNgayService {
     CongViecNgay save(CongViecNgay congViecNgay);
     void  deleteById(int maCvNgay);
     CongViecNgay layCongViecNgayTheoMaCvNgay(int maCvNgay);
+
+    List<CongViecNgay> layTatCaCongViecNgayCuaNguoiDungTheoThangNam(int maNd, int thang, int nam);
 }

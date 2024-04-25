@@ -50,24 +50,4 @@ public class LoginController {
         return new ResponseEntity<>(Collections.singletonMap("token", token), HttpStatus.OK);
     }
 
-    @GetMapping("/verify-account")
-    public ResponseEntity<String> verifyAccount(@RequestParam String email,
-                                                @RequestParam String otp,
-                                                @RequestParam(defaultValue = "") String newPass,
-                                                @RequestParam String roleId
-    ) {
-        return new ResponseEntity<>(loginService.verifyAccount(email, otp, newPass, roleId), HttpStatus.OK);
-    }
-    @PutMapping("/regenerate-otp")
-    public ResponseEntity<String> regenerateOtp(@RequestParam String email,
-                                                @RequestParam String username,
-                                                @RequestParam String roleId,
-                                                @RequestParam(defaultValue = "") String password) {
-        return new ResponseEntity<>(loginService.regenerateOtp(username, email,password, roleId), HttpStatus.OK);
-    }
-//    @PutMapping("/change-pass-otp")
-//    public ResponseEntity<String> regenerateOtp(@RequestBody ChangePassRequest changePassRequest) {
-//        return new ResponseEntity<>(loginService.changePassByOTP(changePassRequest).toString(), HttpStatus.OK);
-//    }
-
-}
+    
