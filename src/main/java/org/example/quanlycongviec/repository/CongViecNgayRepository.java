@@ -13,4 +13,7 @@ public interface CongViecNgayRepository extends JpaRepository<CongViecNgay, Inte
     List<CongViecNgay> findCongViecNgayByCongViec_NguoiDung_MaNguoiDung(int maNd);
     int countByNgayLamAndTrangThaiAndCongViec_NguoiDung_MaNguoiDung(String ngaylam,boolean trangThai, int maNd);
 
+    long deleteByNgayLam(String ngayLam);
+    int deleteByMaCvNgay(int id);
+
 }

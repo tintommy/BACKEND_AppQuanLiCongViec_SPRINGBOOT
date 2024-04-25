@@ -10,4 +10,9 @@ public interface CongViecService {
     CongViec save(CongViec congViec);
     List<NgayDaTaoResponse> danhSachNgay(int maNd);
 
+    long deleteCongViecTrongNgay(String ngaLam);
+
+    List<CongViecNgay> layTatCaCongViecTheoNgay(int maNd, String ngay);
+
+    int deleteCongViecNgayById(int id);
 }

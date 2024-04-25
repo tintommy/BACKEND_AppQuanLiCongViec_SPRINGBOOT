@@ -103,6 +103,23 @@ public class CongViecServiceImpl implements CongViecService {
         return newCongViec;
     }
 
+    @Override
+    @Transactional
+    public long deleteCongViecTrongNgay(String ngaLam) {
+        return congViecNgayRepository.deleteByNgayLam(ngaLam);
+    }
+
+    @Override
+    public List<CongViecNgay> layTatCaCongViecTheoNgay(int maNd, String ngay) {
+        return congViecNgayRepository.findByCongViec_NguoiDung_MaNguoiDungAndNgayLam(maNd,ngay);
+    }
+
+    @Override
+    @Transactional
+    public int deleteCongViecNgayById(int id) {
+        return congViecNgayRepository.deleteByMaCvNgay(id);
+    }
+
     public List<NgayDaTaoResponse> danhSachNgay(int maNd) {
         List<CongViecNgay> items = congViecNgayRepository.findCongViecNgayByCongViec_NguoiDung_MaNguoiDung(maNd);
         Set<String> danhSachNgay = new LinkedHashSet<>();
@@ -134,6 +151,8 @@ public class CongViecServiceImpl implements CongViecService {
     }
 
 
+
+
     //Hang ngay
     private static List<String> listDailyDates(String startDateStr, String endDateStr) {
         List<String> dates = new ArrayList<>();
@@ -158,7 +177,7 @@ public class CongViecServiceImpl implements CongViecService {
     // tu thu 2 den thu 6
     public static List<String> listWeekdays(String startDateStr, String endDateStr) {
         List<String> dates = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date startDate = sdf.parse(startDateStr);
             Date endDate = sdf.parse(endDateStr);

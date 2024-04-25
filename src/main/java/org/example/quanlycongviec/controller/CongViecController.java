@@ -33,6 +33,24 @@ public class CongViecController {
         return ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/quanlyngay/{ngay}")
+    private ResponseEntity<Long> danhSachNgay(@PathVariable String ngay) {
+        long soViecDaXoa = congViecService.deleteCongViecTrongNgay(ngay);
+        if (soViecDaXoa!=0) {
+            return ResponseEntity.ok(soViecDaXoa);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/quanlyngay/{maNd}/{ngay}")
+    public ResponseEntity<List<CongViecNgay>> congViecNgayTheoMaNd(@PathVariable int maNd, @PathVariable String ngay) {
+        List<CongViecNgay> listCongViecNgay = congViecService.layTatCaCongViecTheoNgay(maNd, ngay);
+        if (!listCongViecNgay.isEmpty()) {
+            return ResponseEntity.ok(listCongViecNgay);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping("")
     private ResponseEntity<?> saveCongViec(@RequestBody CongViecRequest congViecRequest) {
         CongViec congViec = congviecMapper.congViecDtoToCongViec(congViecRequest);
@@ -40,7 +58,15 @@ public class CongViecController {
             return ResponseEntity.accepted().build();
         }
         return ResponseEntity.badRequest().build();
+    }
 
+    @DeleteMapping("/quanlyngay/id/{idCv}")
+    private  ResponseEntity<?> xoaCongViecNgay(@PathVariable int idCv ) {
+        int result = congViecService.deleteCongViecNgayById(idCv);
+        if (result != 0) {
+            return ResponseEntity.ok(1);
+        }
+        return ResponseEntity.badRequest().build();
     }
 
 
