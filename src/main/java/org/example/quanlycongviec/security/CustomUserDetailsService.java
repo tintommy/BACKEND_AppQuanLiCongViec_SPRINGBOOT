@@ -21,6 +21,18 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         NguoiDung temp = nguoiDungRepository.findByEmail(email);
+        if(temp==null){
+            GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_USER");
+            return new User(
+                    "abc@gmail.com",
+                    "abc",
+                    new ArrayList<GrantedAuthority>() {{
+                        add(authority);
+                    }}
+            );
+        }
+
+
          NguoiDung user = nguoiDungRepository.findById(temp.getMaNguoiDung())
                 .orElseThrow(() -> new UsernameNotFoundException("User not exists by Username or Email"));
 

@@ -53,7 +53,7 @@ public class LoginServiceImp implements LoginService {
         NguoiDung nguoiDung = new NguoiDung();
         NguoiDung nguoiDungByEmail = nguoiDungRepository.findByEmail(signUpRequest.getEmail());
         if (nguoiDungByEmail != null) return false;
-        emailService.sendMail(signUpRequest.getEmail());
+
 
         nguoiDung.setEmail(signUpRequest.getEmail());
         nguoiDung.setHo(signUpRequest.getHo());
