@@ -55,7 +55,7 @@ public class CongViecController {
     private ResponseEntity<?> saveCongViec(@RequestBody CongViecRequest congViecRequest) {
         CongViec congViec = congviecMapper.congViecDtoToCongViec(congViecRequest);
         if (congViecService.save(congViec) != null) {
-            return ResponseEntity.accepted().build();
+            return ResponseEntity.ok(congViec);
         }
         return ResponseEntity.badRequest().build();
     }
