@@ -27,6 +27,14 @@ public class CongViecNgayController {
         }
         return ResponseEntity.notFound().build();
     }
+    @GetMapping("/NguoiDung/{maNd}/{thang}/{nam}")
+    public ResponseEntity<List<CongViecNgay>> congViecNgayTheoMaNdVaThangNam(@PathVariable int maNd, @PathVariable int thang,@PathVariable int nam) {
+        List<CongViecNgay> listCongViecNgay = congViecNgayService.layTatCaCongViecNgayCuaNguoiDungTheoThangNam(maNd, thang,nam);
+        if (!listCongViecNgay.isEmpty()) {
+            return ResponseEntity.ok(listCongViecNgay);
+        }
+        return ResponseEntity.notFound().build();
+    }
 
     @GetMapping("/{maCvNgay}")
     public ResponseEntity<CongViecNgay> congViecNgayTheoMaCvNgay(@PathVariable int maCvNgay) {

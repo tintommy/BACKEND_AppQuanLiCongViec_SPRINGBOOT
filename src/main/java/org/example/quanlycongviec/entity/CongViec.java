@@ -45,6 +45,7 @@ public class CongViec {
 
     @ManyToOne()
     @JoinColumn(name = "ma_nd")
+    @JsonIgnore
     private NguoiDung nguoiDung;
 
     @JsonIgnore
