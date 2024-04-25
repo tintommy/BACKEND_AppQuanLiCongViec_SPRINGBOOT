@@ -45,6 +45,7 @@ public class CongViec {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "ma_nd")
+    @JsonIgnore
     private NguoiDung nguoiDung;
 
     @JsonIgnore
