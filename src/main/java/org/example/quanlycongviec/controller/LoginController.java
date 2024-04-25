@@ -23,13 +23,13 @@ public class LoginController {
     private EmailService emailService;
 
     @PostMapping("/sendMail")
-    public ResponseEntity<?> sendMail(@RequestParam String email ) {
-       return ResponseEntity.ok(Collections.singletonMap("otp",emailService.sendMail(email)));
+    public ResponseEntity<?> sendMail(@RequestParam String email) {
+        return ResponseEntity.ok(Collections.singletonMap("otp", emailService.sendMail(email)));
     }
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody SignUpRequest signUpRequest) {
-        if (loginService.addUser(signUpRequest)==false) {
+        if (loginService.addUser(signUpRequest) == false) {
             return new ResponseEntity<>(Collections.singletonMap("status", false), HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(Collections.singletonMap("status", true), HttpStatus.OK);
@@ -39,9 +39,9 @@ public class LoginController {
     public ResponseEntity<?> signin(@RequestBody SignInRequest signInRequest) {
         String password = signInRequest.getPassword();
         String email = signInRequest.getEmail();
-        String token="";
-        if(loginService.checkLogin(email, password)) {
-             token = loginService.login( email, password);
+        String token = "";
+        if (loginService.checkLogin(email, password)) {
+            token = loginService.login(email, password);
 
         } else {
             return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
@@ -50,4 +50,4 @@ public class LoginController {
         return new ResponseEntity<>(Collections.singletonMap("token", token), HttpStatus.OK);
     }
 
-    
+}
