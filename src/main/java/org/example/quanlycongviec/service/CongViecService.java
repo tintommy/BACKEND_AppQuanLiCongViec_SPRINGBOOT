@@ -15,4 +15,6 @@ public interface CongViecService {
     List<CongViecNgay> layTatCaCongViecTheoNgay(int maNd, String ngay);
 
     int deleteCongViecNgayById(int id);
+
+    CongViecNgay saveCongViecNgay(CongViecNgay congViecNgay);
 }

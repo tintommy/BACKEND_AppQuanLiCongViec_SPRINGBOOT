@@ -120,6 +120,11 @@ public class CongViecServiceImpl implements CongViecService {
         return congViecNgayRepository.deleteByMaCvNgay(id);
     }
 
+    @Override
+    public CongViecNgay saveCongViecNgay(CongViecNgay congViecNgay) {
+        return congViecNgayRepository.save(congViecNgay);
+    }
+
     public List<NgayDaTaoResponse> danhSachNgay(int maNd) {
         List<CongViecNgay> items = congViecNgayRepository.findCongViecNgayByCongViec_NguoiDung_MaNguoiDung(maNd);
         Set<String> danhSachNgay = new LinkedHashSet<>();

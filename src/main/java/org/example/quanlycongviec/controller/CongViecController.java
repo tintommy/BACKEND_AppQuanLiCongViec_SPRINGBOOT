@@ -69,6 +69,16 @@ public class CongViecController {
         return ResponseEntity.badRequest().build();
     }
 
+    @PostMapping("/congViecNgay")
+    private ResponseEntity<?> saveCongViecNgay(@RequestBody CongViecNgay congViecNgay) {
+        if (congViecService.saveCongViecNgay(congViecNgay) != null) {
+            return ResponseEntity.ok(congViecNgay);
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+
+
 
 
 }
