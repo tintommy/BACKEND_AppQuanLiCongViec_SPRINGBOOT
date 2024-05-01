@@ -71,6 +71,11 @@ public class SuKienServiceImpl implements SuKienService {
         return suKienRepository.getAllEventOfUser(maNd);
     }
 
+    @Override
+    public List<SuKien> laySuKienTuNgayDenNgayCuaNguoiDung(int maNd, String ngayBD, String ngayKT) {
+        return suKienRepository.findEventsFromDayToDay(maNd, ngayBD, ngayKT);
+    }
+
     @Autowired
     public void setSuKienRepository(SuKienRepository suKienRepository) {
         this.suKienRepository = suKienRepository;

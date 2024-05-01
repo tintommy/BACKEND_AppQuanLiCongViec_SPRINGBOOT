@@ -75,4 +75,13 @@ public class SuKienController {
 
 
     }
+    @GetMapping("SuKienTuNgayDenNgay/{ngayBD}/{ngayKT}/{maNd}")
+    private ResponseEntity<?> suKienTuNgayDenNgay(@PathVariable String ngayBD, @PathVariable String ngayKT, @PathVariable Integer maNd){
+        List<SuKien> EventstList = suKienService.laySuKienTuNgayDenNgayCuaNguoiDung(maNd, ngayBD, ngayKT);
+        if (!EventstList.isEmpty()) {
+            return ResponseEntity.ok(EventstList);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }

@@ -16,4 +16,5 @@ public interface SuKienService {
     Void delete(int maSuKien);
 
     List<SuKien> layTatCaSuKienCuaNguoiDung(int maNd);
+    List<SuKien> laySuKienTuNgayDenNgayCuaNguoiDung(int maNd, String ngayBD, String ngayKT);
 }

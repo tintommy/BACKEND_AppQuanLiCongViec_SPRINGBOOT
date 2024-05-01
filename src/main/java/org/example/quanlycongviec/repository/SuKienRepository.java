@@ -18,6 +18,8 @@ public interface SuKienRepository extends JpaRepository<SuKien, Integer> {
 
     @Query(value = "SELECT * FROM Su_Kien sk where sk.ma_nd=:maNd",nativeQuery = true)
     List<SuKien> getAllEventOfUser(@Param("maNd") int maNd);
+    @Query(value = "SELECT * FROM Su_Kien sk where sk.ma_nd=:maNd and sk.ngay BETWEEN :ngayBD AND :ngayKT", nativeQuery = true)
+    public List<SuKien> findEventsFromDayToDay(@Param("maNd") int maNd, @Param("ngayBD") String ngayBD, @Param("ngayKT") String ngayKT);
 
 
 }

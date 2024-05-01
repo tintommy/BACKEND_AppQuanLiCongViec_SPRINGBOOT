@@ -19,6 +19,7 @@ public class SuKien {
 
     @Column(name = "ten_su_kien")
     private String tenSuKien;
+    @Column(name = "ngay")
     private String ngay;
     private String gio;
 
