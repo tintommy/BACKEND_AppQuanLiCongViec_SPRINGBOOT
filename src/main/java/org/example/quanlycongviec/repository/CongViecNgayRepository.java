@@ -25,7 +25,5 @@ public interface CongViecNgayRepository extends JpaRepository<CongViecNgay, Inte
     List<CongViecNgay> getAllTaskOfUserByMonthYear(@Param("maNd") int maNd, @Param("thang") int thang,@Param("nam") int nam);
 
     List<CongViecNgay> findByCongViec_NguoiDung_MaNguoiDungAndNgayLamBetween(int maNd, String ngayBatDau, String ngayKetThuc);
-//    @Query(value = "SELECT cvn FROM CongViecNgay cvn WHERE cvn.congViec.nguoiDung.maNguoiDung = :maNd AND cvn.ngayLam BETWEEN :ngayBatDau AND :ngayKetThuc")
-//    List<CongViecNgay> findByMaNguoiDungAndNgayLamBetween(@Param("maNd") int maNd, @Param("ngayBatDau") String ngayBatDau, @Param("ngayKetThuc") String ngayKetThuc);
 
 }
