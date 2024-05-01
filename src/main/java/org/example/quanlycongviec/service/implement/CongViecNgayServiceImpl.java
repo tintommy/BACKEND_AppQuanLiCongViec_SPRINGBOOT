@@ -48,10 +48,18 @@ public class CongViecNgayServiceImpl implements CongViecNgayService {
     }
 
     @Override
+
     public CongViecNgay capNhatCvNgay(CongViecNgay congViecNgay, int maCv) {
         Optional<CongViec> cv = congViecRepository.findById(maCv);
         congViecNgay.setCongViec(cv.get());
         return congViecNgayRepository.save(congViecNgay);
+    }    
+
+
+    @Override
+    public List<CongViecNgay> layTatCaCongViecTuNgayDenNgay(int maNd, String ngayBatDau, String ngayKetThuc) {
+        return congViecNgayRepository.findByCongViec_NguoiDung_MaNguoiDungAndNgayLamBetween(maNd,ngayBatDau,ngayKetThuc);
+
     }
 
 

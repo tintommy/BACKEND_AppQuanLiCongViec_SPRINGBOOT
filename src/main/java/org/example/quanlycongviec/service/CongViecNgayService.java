@@ -13,4 +13,6 @@ public interface CongViecNgayService {
     List<CongViecNgay> layTatCaCongViecNgayCuaNguoiDungTheoThangNam(int maNd, int thang, int nam);
 
     CongViecNgay capNhatCvNgay(CongViecNgay congViecNgay, int maCv);
+    
+    List<CongViecNgay>layTatCaCongViecTuNgayDenNgay(int maNd, String ngayBatDau, String ngayKetThuc);
 }
