@@ -26,7 +26,8 @@ public class CongViecNgay {
     @Column(name = "trang_thai")
     private boolean trangThai;
 
-    @Column(name= "phan_tram_hoan_thanh")
+
+    @Column(name = "phan_tram_hoan_thanh")
     private int phanTramHoanThanh;
 
     @JsonIgnore

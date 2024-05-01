@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -52,6 +53,14 @@ public class CongViecNgayController {
         congViecNgayService.save(congViecNgay);
         List<CongViecNgay> listCongViecNgay = congViecNgayService.layTatCaCongViecNgayCuaNguoiDung(maNd, ngay);
         return ResponseEntity.ok(listCongViecNgay);
+    }
+    @PutMapping("/CapNhatCongViecNgay/{maCv}")
+    public ResponseEntity<?> capNhatCongViecNgay(@RequestBody CongViecNgay cvNgay, @PathVariable int maCv) {
+        CongViecNgay congViecNgay = congViecNgayService.capNhatCvNgay(cvNgay,maCv);
+        if (congViecNgay != null)
+            return ResponseEntity.ok(Collections.singletonMap("status", true));
+
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/XoaCongViecNgay/{maCvNgay}/{maNd}/{ngay}")
