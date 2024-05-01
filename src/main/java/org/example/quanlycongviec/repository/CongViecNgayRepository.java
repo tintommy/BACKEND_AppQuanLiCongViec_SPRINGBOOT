@@ -21,9 +21,11 @@ public interface CongViecNgayRepository extends JpaRepository<CongViecNgay, Inte
     long deleteByNgayLam(String ngayLam);
     int deleteByMaCvNgay(int id);
 
-
-
     @Query(value = "SELECT cvn.* FROM Cong_Viec_Ngay cvn inner join Cong_Viec cv on cvn.ma_cv= cv.ma_cv  WHERE MONTH(cvn.ngay_lam) = :thang AND YEAR(cvn.ngay_lam) = :nam And cv.ma_nd=:maNd", nativeQuery = true)
     List<CongViecNgay> getAllTaskOfUserByMonthYear(@Param("maNd") int maNd, @Param("thang") int thang,@Param("nam") int nam);
+
+    List<CongViecNgay> findByCongViec_NguoiDung_MaNguoiDungAndNgayLamBetween(int maNd, String ngayBatDau, String ngayKetThuc);
+//    @Query(value = "SELECT cvn FROM CongViecNgay cvn WHERE cvn.congViec.nguoiDung.maNguoiDung = :maNd AND cvn.ngayLam BETWEEN :ngayBatDau AND :ngayKetThuc")
+//    List<CongViecNgay> findByMaNguoiDungAndNgayLamBetween(@Param("maNd") int maNd, @Param("ngayBatDau") String ngayBatDau, @Param("ngayKetThuc") String ngayKetThuc);
 
 }

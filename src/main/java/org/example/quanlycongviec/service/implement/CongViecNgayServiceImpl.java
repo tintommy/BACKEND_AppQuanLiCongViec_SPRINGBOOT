@@ -42,5 +42,10 @@ public class CongViecNgayServiceImpl implements CongViecNgayService {
         return congViecNgayRepository.getAllTaskOfUserByMonthYear(maNd,thang,nam);
     }
 
+    @Override
+    public List<CongViecNgay> layTatCaCongViecTuNgayDenNgay(int maNd, String ngayBatDau, String ngayKetThuc) {
+        return congViecNgayRepository.findByCongViec_NguoiDung_MaNguoiDungAndNgayLamBetween(maNd,ngayBatDau,ngayKetThuc);
+    }
+
 
 }

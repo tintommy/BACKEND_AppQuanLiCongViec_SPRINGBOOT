@@ -11,4 +11,5 @@ public interface CongViecNgayService {
     CongViecNgay layCongViecNgayTheoMaCvNgay(int maCvNgay);
 
     List<CongViecNgay> layTatCaCongViecNgayCuaNguoiDungTheoThangNam(int maNd, int thang, int nam);
+    List<CongViecNgay>layTatCaCongViecTuNgayDenNgay(int maNd, String ngayBatDau, String ngayKetThuc);
 }
