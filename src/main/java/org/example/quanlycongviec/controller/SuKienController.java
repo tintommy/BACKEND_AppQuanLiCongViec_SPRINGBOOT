@@ -54,7 +54,7 @@ public class SuKienController {
     private ResponseEntity<?> themSuKien(@RequestBody SuKien suKien, @RequestParam Integer maNd) {
         SuKien sk = suKienService.add(suKien, maNd);
         if (sk != null)
-            return ResponseEntity.ok(Collections.singletonMap("status", true));
+            return ResponseEntity.ok(sk);
 
         return ResponseEntity.notFound().build();
     }
